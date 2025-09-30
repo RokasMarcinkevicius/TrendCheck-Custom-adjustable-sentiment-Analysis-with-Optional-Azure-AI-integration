@@ -1,0 +1,26 @@
+
+syntax = "proto3";
+option csharp_namespace = "GrpcService";
+
+service ArticleService {
+  rpc Submit (SubmitRequest) returns (SubmitReply);
+  rpc Status (StatusRequest) returns (StatusReply);
+  rpc Result (ResultRequest) returns (ResultReply);
+}
+
+message SubmitRequest { string user = 1; string text = 2; string engine = 3; bool translate = 4; }
+message SubmitReply { string requestId = 1; }
+
+message StatusRequest { string requestId = 1; }
+message StatusReply { string status = 1; string engine = 2; string error = 3; }
+
+message ResultRequest { string requestId = 1; }
+message ResultReply {
+  string company = 1;
+  string ticker = 2;
+  string direction = 3;
+  double magnitude = 4;
+  double sentimentScore = 5;
+  string evidenceSnippet = 6;
+  string translation = 7;
+}

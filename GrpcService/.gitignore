@@ -1,0 +1,92 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.TrendCheck.iml
+/modules.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+*.swp
+*.swo
+
+# --- .NET build outputs ---
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+artifacts/
+TestResults/
+BenchmarkDotNet.Artifacts/
+
+# --- JetBrains Rider / IntelliJ ---
+.idea/
+*.iml
+*.ipr
+*.iws
+# Rider caches occasionally created at repo root
+shelf/
+workspace.xml
+contentModel.xml
+projectSettingsUpdater.xml
+.idea.TrendCheck.iml
+modules.xml
+# Database tool windows
+dataSources/
+dataSources.local.xml
+
+# --- Visual Studio (if collaborators use it) ---
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# --- VS Code ---
+.vscode/
+
+# --- Editor HTTP Client requests ---
+.http
+httpRequests/
+
+# --- NuGet ---
+# packages/               # (uncomment if you use per-repo packages folder)
+# NOTE: keep packages.lock.json checked in for reproducible restores
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Code coverage ---
+coverage/
+*.coverage
+*.coveragexml
+coverage.cobertura.xml
+*.opencover.xml
+
+# --- Node / Front-end (if added later) ---
+node_modules/
+wwwroot/lib/
+
+# --- Secrets / environment files ---
+*.secret*
+*.secrets.json
+.env
+.env.*
+*.ps1.local
+*.sh.local
+
+# --- App settings overrides ---
+# Keep default and Development configs in repo; ignore machine-specific/local overrides
+appsettings.*.local.json
+appsettings.Local.json

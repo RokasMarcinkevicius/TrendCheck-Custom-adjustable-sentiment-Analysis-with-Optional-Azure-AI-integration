@@ -1,0 +1,210 @@
+
+### LOCAL ENGINE
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) soars after it beats expectations and raises guidance. Analysts upgrade the stock.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### Check status
+GET http://localhost:5000/api/analyze/status/{{requestId}}
+
+### Get result
+GET http://localhost:5000/api/analyze/result/{{requestId}}
+
+### LOCAL ENGINE - Basic Apple Example
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) soars after it beats expectations and raises guidance. Analysts upgrade the stock.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### Check status
+GET http://localhost:5000/api/analyze/status/{{requestId}}
+
+### Get result
+GET http://localhost:5000/api/analyze/result/{{requestId}}
+
+### LOCAL ENGINE - Tesla Negative News
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "analyst1",
+  "text": "Tesla TSLA plunges after a profit warning and recalls. The company misses expectations and faces regulatory probe over safety issues.",
+  "engine": "local",
+  "translate": false
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - Microsoft Earnings Beat
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "trader_pro",
+  "text": "Microsoft Corporation (MSFT) reported strong quarterly results, beating analyst expectations on both revenue and earnings. The company raised its full-year guidance and announced a robust growth in cloud services. CEO Satya Nadella said the company is bullish on AI integration across all products.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - NVIDIA Mixed Signals
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "market_watcher",
+  "text": "NVIDIA Corporation (NVDA) shares tumble despite record profits as investors worry about regulatory headwinds. While the company exceeded expectations and reported surge in AI chip demand, concerns about export restrictions and competition from AMD weigh on the stock. Analysts remain bullish but cut price targets.",
+  "engine": "local",
+  "translate": false
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - Apple Product Launch Hype
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "tech_analyst",
+  "text": "Apple Inc. stock soars ahead of highly anticipated iPhone 16 launch event. Pre-order numbers exceed expectations, with analysts upgrading price targets. The new AI features are expected to drive strong upgrade cycle. However, some bears warn about China market headwinds and supply chain delays.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - Tesla Cybertruck Recall
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "news_bot",
+  "text": "BREAKING: Tesla issues massive recall for Cybertruck over accelerator pedal safety concerns. NHTSA investigation launched after multiple incidents reported. $TSLA falls in after-hours trading as investors assess potential legal liability. Musk downplays severity in social media posts but analysts express concern about brand reputation damage.",
+  "engine": "local",
+  "translate": false
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - Generic Tech Stock Analysis
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "portfolio_manager",
+  "text": "Tech stocks show mixed performance in today's trading session. While some companies outperform on strong earnings, others face pressure from rising interest rates. Market volatility continues as investors weigh growth prospects against macroeconomic headwinds.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### AZURE ENGINE - Complex Multi-Company News
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "financial_reporter",
+  "text": "In a surprising turn of events, Apple (AAPL) announces strategic partnership with Microsoft (MSFT) for enterprise AI solutions, sending both stocks surging. Meanwhile, Tesla (TSLA) faces renewed scrutiny over Autopilot safety as NVIDIA (NVDA) unveils competing self-driving chip technology. Market analysts upgrade tech sector outlook despite regulatory concerns.",
+  "engine": "azure",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - Edge Case - No Company Mentioned
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "test_user",
+  "text": "The stock market shows resilience as investors remain optimistic about future growth prospects. Economic indicators suggest positive momentum heading into next quarter.",
+  "engine": "local",
+  "translate": false
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}
+
+### LOCAL ENGINE - Heavy Negation Test
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "sentiment_tester",
+  "text": "Apple (AAPL) does not miss expectations and is hardly underperforming. The company never fails to deliver strong results without compromising quality. Stock barely declines despite no profit warnings.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.global.set("requestId", response.body.requestId);
+});
+%}

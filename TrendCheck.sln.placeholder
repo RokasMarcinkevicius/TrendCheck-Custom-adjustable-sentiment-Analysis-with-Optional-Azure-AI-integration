@@ -1,0 +1,20 @@
+
+This is a placeholder. Create a real solution locally with:
+
+  dotnet new sln -n TrendCheck
+
+# Projects
+  dotnet new classlib -n Domain -f net9.0
+  dotnet new classlib -n Application -f net9.0
+  dotnet new classlib -n Infrastructure -f net9.0
+  dotnet new webapi   -n Api -f net9.0 --use-controllers
+  dotnet new grpc     -n GrpcService -f net9.0
+
+# Add projects to solution
+  dotnet sln TrendCheck.sln add Domain/Domain.csproj Application/Application.csproj Infrastructure/Infrastructure.csproj Api/Api.csproj GrpcService/GrpcService.csproj
+
+# Add references
+  dotnet add Application/Application.csproj reference Domain/Domain.csproj
+  dotnet add Infrastructure/Infrastructure.csproj reference Application/Application.csproj Domain/Domain.csproj
+  dotnet add Api/Api.csproj reference Application/Application.csproj Infrastructure/Infrastructure.csproj Domain/Domain.csproj
+  dotnet add GrpcService/GrpcService.csproj reference Application/Application.csproj Infrastructure/Infrastructure.csproj Domain/Domain.csproj

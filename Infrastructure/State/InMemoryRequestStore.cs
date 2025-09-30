@@ -1,4 +1,3 @@
-
 using System.Collections.Concurrent;
 using Application.Abstractions;
 using Domain.Entities;
@@ -11,5 +10,11 @@ public sealed class InMemoryRequestStore : IRequestStore
 
     public ImmersiveRequest Save(ImmersiveRequest req) { _db[req.Id] = req; return req; }
     public ImmersiveRequest? Get(string id) => _db.TryGetValue(id, out var r) ? r : null;
+    public List<ImmersiveRequest?> GetAll()
+    {
+        // Snapshot current values; ConcurrentDictionary supports safe enumeration.
+        return _db.Values.Select(v => (ImmersiveRequest?)v).ToList();
+    }
+
     public void Update(ImmersiveRequest req) => _db[req.Id] = req;
 }

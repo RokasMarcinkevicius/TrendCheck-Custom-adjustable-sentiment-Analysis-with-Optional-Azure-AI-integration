@@ -4,10 +4,17 @@ using Application.Models;
 using GrpcService.Services;
 using Infrastructure.Azure;
 using Infrastructure.State;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 var cfg = builder.Configuration;
-
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenLocalhost(5000, o =>
+    {
+        o.Protocols = HttpProtocols.Http2; // HTTP/2
+    });
+});
 var seed = new (string name, string ticker, string[] aliases)[]
 {
     ("Apple Inc.", "AAPL", new[]{ "Apple", "AAPL" }),
@@ -25,5 +32,9 @@ builder.Services.AddGrpc();
 var app = builder.Build();
 
 app.MapGrpcService<ArticleServiceImpl>();
+if (app.Environment.IsDevelopment())
+{
+    app.MapGrpcReflectionService();
+}
 app.MapGet("/", () => "gRPC service running. Use a gRPC client.");
 app.Run();

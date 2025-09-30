@@ -43,7 +43,6 @@ public sealed class AnalyzeController(IRequestStore store, SubmitArticleCommand 
         return Ok(allRequests.Select(req => new
         {
             requestId = req.Id,
-            user = req.User,
             status = req.Status.ToString(),
             engine = req.Engine,
             createdAt = req.CreatedAt,

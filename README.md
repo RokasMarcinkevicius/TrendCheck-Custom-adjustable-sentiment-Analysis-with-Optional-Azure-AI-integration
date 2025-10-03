@@ -1,6 +1,10 @@
 
 # TrendCheck — .NET 9, Clean Architecture, Azure + Local Analysis
 
+
+# Medium Article - https://majestcb.medium.com/trendcheck-configurable-financial-sentiment-in-net-1e547fe79ac8
+
+
 Implements two analysis engines:
 - `local`: offline, rule-based (company extraction + finance-tuned sentiment => direction & magnitude).
 - `azure`: Azure AI Text Analytics (entities + sentiment) and optional Azure Translator. Calls are throttled (Option A requirement).

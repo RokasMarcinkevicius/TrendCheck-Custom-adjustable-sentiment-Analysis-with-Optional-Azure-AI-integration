@@ -1,9 +1,11 @@
 
+using Api;
 using Application.Abstractions;
 using Application.Models;
 using Application.UseCases;
 using Infrastructure.Azure;
 using Infrastructure.State;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 var cfg = builder.Configuration;
@@ -23,11 +25,14 @@ builder.Services.AddSingleton<IRequestStore, InMemoryRequestStore>();
 builder.Services.AddArticleAnalyzer(cfg);
 
 builder.Services.AddScoped<SubmitArticleCommand>();
-
+//builder.Services.AddNewsIngestion(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.WebHost.ConfigureKestrel(o =>
+{
+    o.ListenLocalhost(5000, lo => lo.Protocols = HttpProtocols.Http1);
+});
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();

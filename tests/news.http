@@ -1,0 +1,11 @@
+### Get latest
+GET http://localhost:5000/api/news?tickers=AAPL,TSLA&limit=50
+
+### Poll now
+POST http://localhost:5000/api/news/poll
+Content-Type: application/json
+
+{ "tickers": ["AAPL","TSLA"], "limit": 50 }
+
+### Sources
+GET http://localhost:5000/api/news/sources

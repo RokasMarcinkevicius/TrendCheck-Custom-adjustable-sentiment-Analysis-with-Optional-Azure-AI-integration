@@ -1,0 +1,267 @@
+############################################
+# SCENARIO 1 — Earnings Beat (Positive)
+############################################
+
+### S1 LOCAL — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) beats revenue and EPS, raises guidance; analysts lift targets and call for upside momentum.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+    client.test("S1 LOCAL submit OK", function() {
+        client.assert(response.status === 200, "S1 LOCAL: status != 200");
+        client.global.set("requestIdLocal1", response.body.requestId);
+    });
+%}
+
+### S1 AZURE — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) beats revenue and EPS, raises guidance; analysts lift targets and call for upside momentum.",
+  "engine": "azure",
+  "translate": true
+}
+
+> {%
+    client.test("S1 AZURE submit OK", function() {
+        client.assert(response.status === 200, "S1 AZURE: status != 200");
+        client.global.set("requestIdAzure1", response.body.requestId);
+    });
+%}
+
+### S1 LOCAL — status
+GET http://localhost:5000/api/analyze/status/{{requestIdLocal1}}
+
+### S1 LOCAL — result
+GET http://localhost:5000/api/analyze/result/{{requestIdLocal1}}
+
+### S1 AZURE — status
+GET http://localhost:5000/api/analyze/status/{{requestIdAzure1}}
+
+### S1 AZURE — result
+GET http://localhost:5000/api/analyze/result/{{requestIdAzure1}}
+
+
+
+############################################
+# SCENARIO 2 — Profit Warning / Recall (Negative)
+############################################
+
+### S2 LOCAL — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Tesla (TSLA) issues profit warning and recalls vehicles; misses expectations as regulators probe safety issues.",
+  "engine": "local",
+  "translate": false
+}
+
+> {%
+    client.test("S2 LOCAL submit OK", function() {
+        client.assert(response.status === 200, "S2 LOCAL: status != 200");
+        client.global.set("requestIdLocal2", response.body.requestId);
+    });
+%}
+
+### S2 AZURE — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Tesla (TSLA) issues profit warning and recalls vehicles; misses expectations as regulators probe safety issues.",
+  "engine": "azure",
+  "translate": false
+}
+
+> {%
+    client.test("S2 AZURE submit OK", function() {
+        client.assert(response.status === 200, "S2 AZURE: status != 200");
+        client.global.set("requestIdAzure2", response.body.requestId);
+    });
+%}
+
+### S2 LOCAL — status
+GET http://localhost:5000/api/analyze/status/{{requestIdLocal2}}
+
+### S2 LOCAL — result
+GET http://localhost:5000/api/analyze/result/{{requestIdLocal2}}
+
+### S2 AZURE — status
+GET http://localhost:5000/api/analyze/status/{{requestIdAzure2}}
+
+### S2 AZURE — result
+GET http://localhost:5000/api/analyze/result/{{requestIdAzure2}}
+
+
+
+############################################
+# SCENARIO 3 — Mixed Signals / Regulatory Headwinds
+############################################
+
+### S3 LOCAL — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "NVIDIA (NVDA) posts record profits and strong AI chip demand, but shares slip on export restrictions and rising AMD competition.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+    client.test("S3 LOCAL submit OK", function() {
+        client.assert(response.status === 200, "S3 LOCAL: status != 200");
+        client.global.set("requestIdLocal3", response.body.requestId);
+    });
+%}
+
+### S3 AZURE — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "NVIDIA (NVDA) posts record profits and strong AI chip demand, but shares slip on export restrictions and rising AMD competition.",
+  "engine": "azure",
+  "translate": true
+}
+
+> {%
+    client.test("S3 AZURE submit OK", function() {
+        client.assert(response.status === 200, "S3 AZURE: status != 200");
+        client.global.set("requestIdAzure3", response.body.requestId);
+    });
+%}
+
+### S3 LOCAL — status
+GET http://localhost:5000/api/analyze/status/{{requestIdLocal3}}
+
+### S3 LOCAL — result
+GET http://localhost:5000/api/analyze/result/{{requestIdLocal3}}
+
+### S3 AZURE — status
+GET http://localhost:5000/api/analyze/status/{{requestIdAzure3}}
+
+### S3 AZURE — result
+GET http://localhost:5000/api/analyze/result/{{requestIdAzure3}}
+
+
+
+############################################
+# SCENARIO 4 — Product Launch Hype (Balanced)
+############################################
+
+### S4 LOCAL — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) rallies into iPhone 16 launch; strong pre-orders and new AI features fuel upgrade cycle, though China demand and supply-chain delays are risks.",
+  "engine": "local",
+  "translate": false
+}
+
+> {%
+    client.test("S4 LOCAL submit OK", function() {
+        client.assert(response.status === 200, "S4 LOCAL: status != 200");
+        client.global.set("requestIdLocal4", response.body.requestId);
+    });
+%}
+
+### S4 AZURE — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) rallies into iPhone 16 launch; strong pre-orders and new AI features fuel upgrade cycle, though China demand and supply-chain delays are risks.",
+  "engine": "azure",
+  "translate": false
+}
+
+> {%
+    client.test("S4 AZURE submit OK", function() {
+        client.assert(response.status === 200, "S4 AZURE: status != 200");
+        client.global.set("requestIdAzure4", response.body.requestId);
+    });
+%}
+
+### S4 LOCAL — status
+GET http://localhost:5000/api/analyze/status/{{requestIdLocal4}}
+
+### S4 LOCAL — result
+GET http://localhost:5000/api/analyze/result/{{requestIdLocal4}}
+
+### S4 AZURE — status
+GET http://localhost:5000/api/analyze/status/{{requestIdAzure4}}
+
+### S4 AZURE — result
+GET http://localhost:5000/api/analyze/result/{{requestIdAzure4}}
+
+
+
+############################################
+# SCENARIO 5 — Edge / Negation & Ambiguity Handling
+############################################
+
+### S5 LOCAL — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) did not miss expectations and hardly disappointed; the company never fails to deliver solid results and shares barely decline with no warnings.",
+  "engine": "local",
+  "translate": true
+}
+
+> {%
+    client.test("S5 LOCAL submit OK", function() {
+        client.assert(response.status === 200, "S5 LOCAL: status != 200");
+        client.global.set("requestIdLocal5", response.body.requestId);
+    });
+%}
+
+### S5 AZURE — submit
+POST http://localhost:5000/api/analyze/submit
+Content-Type: application/json
+
+{
+  "user": "rokas",
+  "text": "Apple (AAPL) did not miss expectations and hardly disappointed; the company never fails to deliver solid results and shares barely decline with no warnings.",
+  "engine": "azure",
+  "translate": true
+}
+
+> {%
+    client.test("S5 AZURE submit OK", function() {
+        client.assert(response.status === 200, "S5 AZURE: status != 200");
+        client.global.set("requestIdAzure5", response.body.requestId);
+    });
+%}
+
+### S5 LOCAL — status
+GET http://localhost:5000/api/analyze/status/{{requestIdLocal5}}
+
+### S5 LOCAL — result
+GET http://localhost:5000/api/analyze/result/{{requestIdLocal5}}
+
+### S5 AZURE — status
+GET http://localhost:5000/api/analyze/status/{{requestIdAzure5}}
+
+### S5 AZURE — result
+GET http://localhost:5000/api/analyze/result/{{requestIdAzure5}}
